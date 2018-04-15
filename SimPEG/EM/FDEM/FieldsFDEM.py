@@ -820,7 +820,7 @@ class Fields3D_b(FieldsFDEM):
         if adjoint:
             s_eDeriv = src.s_eDeriv(self.prob, self._MeSigmaI.T * v, adjoint)
             return (
-                self._MeSigmaIDeriv(w).T * v +
+                self._MeSigmaIDeriv(w, v, adjoint) +
                 self._MfMuiDeriv(bSolution).T * (
                     self._edgeCurl * (self._MeSigmaI.T * v)
                     ) -
@@ -829,7 +829,7 @@ class Fields3D_b(FieldsFDEM):
             )
         s_eDeriv = src.s_eDeriv(self.prob, v, adjoint)
         return (
-            self._MeSigmaIDeriv(w) * v +
+            self._MeSigmaIDeriv(w, v) +
             self._MeSigmaI * (
                 self._edgeCurl.T * (self._MfMuiDeriv(bSolution) * v)
             ) -
@@ -1162,17 +1162,18 @@ class Fields3D_j(FieldsFDEM):
         if not adjoint:
             hDeriv_m = 1./(1j*omega(src.freq)) * (
                 -1. *  (
-                    MeMuI * (C.T * (MfRhoDeriv(jSolution)*v)) +
+                    MeMuI * (C.T * (MfRhoDeriv(jSolution, v, adjoint))) +
                     MeMuIDeriv(C.T * (MfRho * jSolution)) *  v
                 ) +
                 MeMuI * s_mDeriv(v) + MeMuIDeriv(s_m) * v
             )
 
         elif adjoint:
+            vec = C * (MeMuI.T * v)
             hDeriv_m = 1./(1j*omega(src.freq)) * (
                 (
                     -1. * (
-                        MfRhoDeriv(jSolution).T * (C * (MeMuI.T * v)) +
+                        MfRhoDeriv(jSolution, vec, adjoint) +
                         MeMuIDeriv(C.T * (MfRho * jSolution)).T * v
                     )
                 ) + s_mDeriv(MeMuI.T*v) + MeMuIDeriv(s_m).T * v
@@ -1528,8 +1529,8 @@ class Fields3D_h(FieldsFDEM):
         if adjoint:
             w = self._MfI.T * v
             return (
-                self._MfRhoDeriv(self._edgeCurl * hSolution).T * w -
-                self._MfRhoDeriv(s_e).T * w +
+                self._MfRhoDeriv(self._edgeCurl * hSolution, w, adjoint) -
+                self._MfRhoDeriv(s_e, w, adjoint) +
                 src.ePrimaryDeriv(self.prob, v, adjoint)
             )
         return (
