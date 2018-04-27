@@ -94,7 +94,7 @@ class DC_CC_DipoleFullspaceTests(unittest.TestCase):
 
     def test_Problem3D_CC_Dirchlet(self, tolerance=0.1):
         problem = DC.Problem3D_CC(
-            self.mesh, sigma=self.sigma, bc_type='Dirchlet'
+            self.mesh, sigma=self.sigma, bc_type='Dirichlet'
             )
         problem.Solver = Solver
         problem.pair(self.survey)

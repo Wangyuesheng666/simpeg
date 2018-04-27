@@ -282,7 +282,7 @@ class Problem3D_CC(BaseDCProblem):
                 temp_zm = np.ones_like(gBFzm[:, 2])
                 temp_zp = np.ones_like(gBFzp[:, 2])
 
-                if(self.bc_type == 'Neumann'):
+                if(self.bc_type.lower() == 'neumann'):
                     if self.verbose:
                         print('Setting BC to Neumann.')
                     alpha_xm, alpha_xp = temp_xm*0., temp_xp*0.
@@ -297,7 +297,7 @@ class Problem3D_CC(BaseDCProblem):
                     gamma_ym, gamma_yp = temp_ym*0., temp_yp*0.
                     gamma_zm, gamma_zp = temp_zm*0., temp_zp*0.
 
-                elif(self.bc_type == 'Dirichlet'):
+                elif(self.bc_type.lower() == 'dirichlet'):
                     if self.verbose:
                         print('Setting BC to Dirichlet.')
                     alpha_xm, alpha_xp = temp_xm, temp_xp
@@ -312,7 +312,7 @@ class Problem3D_CC(BaseDCProblem):
                     gamma_ym, gamma_yp = temp_ym*0., temp_yp*0.
                     gamma_zm, gamma_zp = temp_zm*0., temp_zp*0.
 
-                elif(self.bc_type == 'Mixed'):
+                elif(self.bc_type.lower() == 'mixed'):
                     # Ztop: Neumann
                     # Others: Mixed: alpha * phi + d phi dn = 0
                     # where alpha = 1 / r  * dr/dn
@@ -350,6 +350,12 @@ class Problem3D_CC(BaseDCProblem):
                     gamma_xm, gamma_xp = temp_xm*0., temp_xp*0.
                     gamma_ym, gamma_yp = temp_ym*0., temp_yp*0.
                     gamma_zm, gamma_zp = temp_zm*0., temp_zp*0.
+
+                else:
+                    raise Exception(
+                        "bc_type must be in ['Dirichlet', 'Neuman', 'Mixed']. "
+                        "You provided {}".format(self.bc_type)
+                    )
 
                 alpha = [
                     alpha_xm, alpha_xp,
