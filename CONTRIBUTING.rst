@@ -23,6 +23,49 @@ you can join our slack group at http://slack.simpeg.xyz.
 
 .. _bugs:
 
+[I 17:39:58.098 NotebookApp] The port 8888 is already in use, trying another port.
+[I 17:39:58.099 NotebookApp] The port 8889 is already in use, trying another port.
+[I 17:39:58.100 NotebookApp] The port 8890 is already in use, trying another port.
+[I 17:39:58.100 NotebookApp] The port 8891 is already in use, trying another port.
+[I 17:39:58.140 NotebookApp] JupyterLab beta preview extension loaded from D:\Users\wangsheng\Anaconda3\lib\site-packages\jupyterlab
+[I 17:39:58.140 NotebookApp] JupyterLab application directory is D:\Users\wangsheng\Anaconda3\share\jupyter\lab
+[W 17:39:58.146 NotebookApp] Error loading server extension jupyterlab
+Traceback (most recent call last):
+File "D:\Users\wangsheng\Anaconda3\lib\site-packages\jupyterlab\commands.py", line 321, in __init__
+self._run(['node', 'node-version-check.js'], cwd=HERE, quiet=True)
+File "D:\Users\wangsheng\Anaconda3\lib\site-packages\jupyterlab\commands.py", line 1165, in _run
+proc = Process(cmd, **kwargs)
+File "D:\Users\wangsheng\Anaconda3\lib\site-packages\jupyterlab\process.py", line 73, in __init__
+self.proc = self._create_process(cwd=cwd, env=env)
+File "D:\Users\wangsheng\Anaconda3\lib\site-packages\jupyterlab\process.py", line 131, in _create_process
+cmd[0] = which(cmd[0], kwargs.get('env'))
+File "D:\Users\wangsheng\Anaconda3\lib\site-packages\jupyterlab\jlpmapp.py", line 59, in which
+raise ValueError(msg)
+ValueError: Please install nodejs 5+ and npm before continuing installation. nodejs may be installed using conda or directly from the nodejs website.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+File "D:\Users\wangsheng\Anaconda3\lib\site-packages\notebook\notebookapp.py", line 1454, in init_server_extensions
+func(self)
+File "D:\Users\wangsheng\Anaconda3\lib\site-packages\jupyterlab\extension.py", line 111, in load_jupyter_server_extension
+info = get_app_info(app_dir)
+File "D:\Users\wangsheng\Anaconda3\lib\site-packages\jupyterlab\commands.py", line 244, in get_app_info
+handler = _AppHandler(app_dir, logger)
+File "D:\Users\wangsheng\Anaconda3\lib\site-packages\jupyterlab\commands.py", line 324, in __init__
+raise ValueError(msg)
+ValueError: Please install nodejs 5+ and npm before continuing installation. nodejs may be installed using conda or directly from the nodejs website.
+[I 17:39:58.285 NotebookApp] Serving notebooks from local directory: C:\Users\wangsheng
+[I 17:39:58.285 NotebookApp] 0 active kernels
+[I 17:39:58.285 NotebookApp] The Jupyter Notebook is running at:
+[I 17:39:58.285 NotebookApp] http://localhost:8892/?token=f3216a1aa785923b008a8c600d520ea7b5423540e85b820c
+[I 17:39:58.285 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 17:39:58.294 NotebookApp] 
+
+Copy/paste this URL into your browser when you connect for the first time,
+to login with a token:
+http://localhost:8892/?token=f3216a1aa785923b008a8c600d520ea7b5423540e85b820c
+[I 17:39:58.409 NotebookApp] Accepting one-time-token-authenticated connection from ::1
 
 Bugs
 ----
